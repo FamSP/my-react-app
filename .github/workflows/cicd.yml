@@ -18,17 +18,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Login to GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u FamSp --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u famsp --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/FamSp/my-react-app:latest .
+        run: docker build -t ghcr.io/famsp/my-react-app:latest .
 
       - name: Push Docker Image
-        run: docker push ghcr.io/FamSp/my-react-app:latest
+        run: docker push ghcr.io/famsp/my-react-app:latest
 
       - name: Extract React build from container
         run: |
-          CONTAINER_ID=$(docker create ghcr.io/FamSp/my-react-app:latest)
+          CONTAINER_ID=$(docker create ghcr.io/famsp/my-react-app:latest)
           docker cp $CONTAINER_ID:/usr/share/nginx/html ./dist
           docker rm -v $CONTAINER_ID
 
